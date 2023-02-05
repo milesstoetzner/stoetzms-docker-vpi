@@ -44,9 +44,9 @@ COPY --from=qemu-builder /qemu/arm-softmmu/qemu-system-arm /usr/local/bin/qemu-s
 COPY --from=qemu-builder /qemu/aarch64-softmmu/qemu-system-aarch64 /usr/local/bin/qemu-system-aarch64
 COPY --from=qemu-builder /qemu/qemu-img /usr/local/bin/qemu-img
 
-ADD kernel8.img /kernel8.img
-ADD bcm2710-rpi-3-b-plus.dtb /bcm2710-rpi-3-b-plus.dtb
-ADD raspios.img /raspios.img
+ADD kernel8.img /vpi/kernel8.img
+ADD bcm2710-rpi-3-b-plus.dtb /vpi/bcm2710-rpi-3-b-plus.dtb
+ADD raspios.img /vpi/raspios.img
 
 ADD ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

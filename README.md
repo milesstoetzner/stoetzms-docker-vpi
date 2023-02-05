@@ -1,24 +1,24 @@
-# Docker Virtual PI
+# Docker Virtual Raspberry Pi
 
-Simple demo that runs a Raspberry PI 3B+ in a docker container using QEMU.
+Simple demo that runs a virtual Raspberry Pi 3B+ in a docker container using QEMU. Git lfs is used for lage files.
 
-![Docker Virtual PI Demo](figure.png)
+<div align="center">
+	<img height="500" src="figure.png">
+</div>
 
-## Qemu
+## QEMU
 
 - Raspberry 3B+
-- 1GB RAM
 - Cortex-A53 CPU
+- 1GB RAM
 - USB-Net
 
 ## Image
 
 - Operating System: Raspberry Pi OS Lite 
-- Release Date: 2022-09-22 
+- Release Date: 2022-09-06
 - System: 64-bit
-- Kernel Version: 5.15
-- Debian Version: 11 (bullseye)
-- SHA256 Integrity Hash: `72c773781a0a57160eb3fa8bb2a927642fe60c3af62bc980827057bcecb7b98b`
+- Timezone: Europe/Berlin
 - SSH: Enabled
 - Password Authentication: Enabled 
 - Hostname: `rapsberrypi`
@@ -33,7 +33,7 @@ Simple demo that runs a Raspberry PI 3B+ in a docker container using QEMU.
 - disk size is fixed to 8gb
 - internet connection is slow
 
-## Credits and additional Links 
+## Credits and Additional Links 
 
 - https://www.qemu.org/docs/master/system/arm/raspi.html
 - https://github.com/lukechilds/dockerpi
@@ -45,26 +45,21 @@ Simple demo that runs a Raspberry PI 3B+ in a docker container using QEMU.
 
 ### Build and Start VPI
 
-```
+```shell
 docker build -t vpi . && docker run --rm -it -p 5022:5022 --name vpi vpi
 ```
 
-### Resize Image
-```
-qemu-resize raspios.img 8G
-```
-
 ### Shrink Image
-```
+```shell
 wget https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 chmod +x pishrink.sh
-sudo mv pishrink.sh /usr/local/bin
+sudo mv pishrink.sh /usr/local/bin/pishrink
 
-sudo pishrink.sh -Z raspios.img
+sudo pishrink -Z raspios.img raspios.img.xz
 ```
 
 ### Create Image from SD Card
 
-```
+```shell
 sudo dd bs=4M if=/dev/mmcblk0 of=raspios.img
 ```
